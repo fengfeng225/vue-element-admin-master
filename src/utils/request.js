@@ -86,13 +86,37 @@
 
 import axios from 'axios'
 import { Message } from 'element-ui'
+import store from '@/store/index.js'
+import { getTimeStamp } from './auth'
+import router from '@/router/index'
+
+const Timeout = 3600000 // 定义token有效期
+
+function CheckTimeOut() {
+  return (Date.now() - getTimeStamp()) > Timeout
+}
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 
-service.interceptors.request.use()
+// 请求拦截器
+service.interceptors.request.use(config => {
+  // config 是请求的配置信息
+  if (store.getters.token) {
+    // 检查token是否过期
+    if (CheckTimeOut()) {
+      store.dispatch('user/logout')
+      router.push('/login')
+      return Promise.reject()
+    }
+    config.headers.Authorization = `Bearer ${store.getters.token}`
+  }
+  return config // 必须要返回的
+}, error => {
+  return Promise.reject(error)
+})
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
@@ -104,9 +128,15 @@ service.interceptors.response.use(
       return Promise.reject(new Error(message))
     }
   },
-  (error) => {
-    Message.error(error.message) // 提示错误
-    return Promise.reject(error) // 返回错误
+  error => {
+    if (error.response && error.response.data && error.response.data.code === 10002) {
+      store.dispatch('user/logout')
+      router.push('/login')
+      return Promise.reject()
+    } else {
+      Message.error(error.message) // 提示错误
+      return Promise.reject(error) // 返回错误
+    }
   }
 )
 

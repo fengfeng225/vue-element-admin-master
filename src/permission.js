@@ -62,3 +62,37 @@
 //   // finish progress bar
 //   NProgress.done()
 // })
+
+import router from '@/router/index'
+import store from '@/store/index.js'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css' // 引入进度条样式
+
+const whiteList = ['/login', '/404']
+
+router.beforeEach(async(to, from, next) => {
+  nprogress.start()
+  if (store.getters.token) {
+    if (to.path === '/login') {
+      next('/')
+    } else {
+      // 有token才能存用户信息
+      // 没存过就存，存过了就不需要了
+      if (!store.state.user.userInfo.userId) {
+        await store.dispatch('user/getUserInfo')
+      }
+      next()
+    }
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+  nprogress.done()
+})
+
+router.afterEach(() => {
+  nprogress.done()
+})
