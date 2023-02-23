@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/attendances'),
     meta: {
-      title: '考勤' // 为左侧渲染的名称
+      title: '考勤', // 为左侧渲染的名称
+      icon: 'skill'
     }
   }]
 }

@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/departments'),
     meta: {
-      title: '组织架构' // 为左侧渲染的名称
+      title: '组织架构', // 为左侧渲染的名称
+      icon: 'tree'
     }
   }]
 }

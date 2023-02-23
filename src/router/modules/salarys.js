@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/salarys'),
     meta: {
-      title: '工资' // 为左侧渲染的名称
+      title: '工资', // 为左侧渲染的名称
+      icon: 'money'
     }
   }]
 }

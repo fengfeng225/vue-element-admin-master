@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/employees'),
     meta: {
-      title: '员工' // 为左侧渲染的名称
+      title: '员工', // 为左侧渲染的名称
+      icon: 'people'
     }
   }]
 }

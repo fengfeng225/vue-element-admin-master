@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/approvals'),
     meta: {
-      title: '审批' // 为左侧渲染的名称
+      title: '审批', // 为左侧渲染的名称
+      icon: 'tree-table'
     }
   }]
 }

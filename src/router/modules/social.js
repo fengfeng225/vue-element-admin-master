@@ -8,7 +8,8 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/social'),
     meta: {
-      title: '社保' // 为左侧渲染的名称
+      title: '社保', // 为左侧渲染的名称
+      icon: 'table'
     }
   }]
 }
