@@ -1,14 +1,18 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <PageTools :show-before="true" />
   </div>
 </template>
 
 <script>
+import PageTools from '@/components/PageTools/index.vue'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
+  components: {
+    PageTools
+  },
   computed: {
     ...mapGetters([
       'name'
