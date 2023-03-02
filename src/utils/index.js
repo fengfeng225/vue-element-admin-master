@@ -116,6 +116,7 @@ export function param2Obj(url) {
   return obj
 }
 
+// 递归方法将数据转化为tree结构
 export function tranListToTreeData(list, rootValue) {
   const arr = []
   list.forEach(item => {

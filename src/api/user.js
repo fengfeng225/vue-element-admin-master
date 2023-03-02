@@ -22,7 +22,7 @@ export function getUserInfo() {
 }
 
 /**
- * 获取头像的接口
+ * 获取用户信息的接口
  */
 export function getUserDetailById(id) {
   return request({

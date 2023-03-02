@@ -9,12 +9,13 @@
           <slot name="before" />
         </div>
       </el-col>
-      <!-- 右侧 -->
-      <el-row type="flex" justify="end">
-        <!-- 插槽 -->
-        <slot name="after" />
-      </el-row>
-      <el-col />
+      <el-col>
+        <!-- 右侧 -->
+        <el-row type="flex" justify="end">
+          <!-- 插槽 -->
+          <slot name="after" />
+        </el-row>
+      </el-col>
     </el-row>
   </el-card>
 </template>

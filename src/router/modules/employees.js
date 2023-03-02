@@ -8,8 +8,22 @@ export default {
     path: '', // 为空 设为默认
     component: () => import('@/views/employees'),
     meta: {
-      title: '员工', // 为左侧渲染的名称
+      title: '员工管理', // 为左侧渲染的名称
       icon: 'people'
+    }
+  }, {
+    path: 'detail/:id',
+    component: () => import('@/views/employees/detail.vue'),
+    hidden: true,
+    meta: {
+      title: '员工详情'
+    }
+  }, {
+    path: 'print/:id',
+    component: () => import('@/views/employees/print.vue'),
+    hidden: true,
+    meta: {
+      title: '员工打印'
     }
   }]
 }
