@@ -18,6 +18,7 @@ import '@/permission' // permission control
 import * as directives from '@/directives/index.js' // 导出全部自定义指令
 import * as filters from '@/filters'
 import components from '@/components/'
+import checkPermission from '@/mixin/checkPermission'
 
 Object.keys(directives).forEach(key => {
   Vue.directive(key, directives[key])
@@ -33,6 +34,8 @@ Object.keys(filters).forEach(key => {
 Vue.use(ElementUI)
 
 Vue.use(components) // 注册所有的全局组件
+
+Vue.mixin(checkPermission) // 全局混入
 
 Vue.config.productionTip = false
 

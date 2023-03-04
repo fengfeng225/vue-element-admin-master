@@ -2,7 +2,7 @@ import Layout from '@/layout/index.vue'
 
 export default {
   path: '/permission',
-  name: 'permission',
+  name: 'permissions',
   component: Layout,
   children: [{
     path: '', // 为空 设为默认

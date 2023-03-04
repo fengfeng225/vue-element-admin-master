@@ -1,5 +1,6 @@
 import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth.js'
 import { login, getUserInfo, getUserDetailById } from '@/api/user.js'
+import { resetRouter } from '@/router'
 
 export default {
   namespaced: true,
@@ -39,6 +40,10 @@ export default {
     logout(context) {
       context.commit('removeToken')
       context.commit('removeUserInfo')
+      // 重置路由
+      resetRouter()
+      // 重置侧边栏快捷访问
+      context.commit('permission/setRoutes', [], { root: true })
     }
   }
 }

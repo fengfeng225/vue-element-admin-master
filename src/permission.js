@@ -79,9 +79,16 @@ router.beforeEach(async(to, from, next) => {
       // 有token才能存用户信息
       // 没存过就存，存过了就不需要了
       if (!store.state.user.userInfo.userId) {
-        await store.dispatch('user/getUserInfo')
+        const { roles: { menus }} = await store.dispatch('user/getUserInfo')
+        // 获取到用户资料后，做动态路由
+        const routes = await store.dispatch('permission/filterRoutes', menus)
+        console.log(routes)
+        router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }]) // 添加动态路由
+        next(to.path)
+        // next()
+      } else {
+        next()
       }
-      next()
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
